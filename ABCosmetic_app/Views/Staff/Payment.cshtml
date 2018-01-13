@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "Payment";
+    ViewBag.navbarColor = "blue";
+}
+<main>
+    <!--Main Container-->
+    <div class="container">
+        <!--Section: Basic Product Listing-->
+        <section id="products">
+            <div class="divider-new"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <!--Product Panel-->
+
+                    <div class="card-panel product-panel hoverable m-card-panel">
+                        <h2 class="card-title">Register Payment</h2>
+                        <b style="color:red;">@ViewBag.MessageFail</b>
+                        <div class="row">
+                            <!--Form-->
+                            <form class="form-validate" action="/Staff/Pay" method="POST">
+                                <div class="col-xs-12 col-sm-6 col-lg-6">
+
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">title</i>
+                                        <input type="text" id="f-title" class="form-control validate" name="title" required>
+                                        <label for="f-title" data-error="wrong" data-success="right">Order Title</label>
+                                    </div>
+                                    <br />
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">textsms</i>
+                                        <textarea type="text" id="f-content" class="md-textarea form-control validate" name="content" style="height:150px;" required></textarea>
+                                        <label for="f-content" data-error="wrong" data-success="right">Order desription</label>
+                                    </div>
+
+                                    <div class="pull-right">
+                                        @{ var valid = Model.Count == 0 ? "disabled" : "";}
+                                        <button type="submit" class="btn btn-primary btn-lg btn-ptc waves-effect waves-light" @valid>Pay Now</button>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-lg-6">
+                                    <input hidden name="oId" value="@ViewBag.oId" />
+                                    <ul class="collection m-tiems">
+                                        <li class="collection-item">
+                                            <div>
+                                                <b>@ViewBag.oName</b>
+                                            </div>
+                                        </li>
+                                       @foreach (var item in Model)
+                                       {
+                                        <li class="collection-item m-item" data-id="3">
+                                            <div>
+                                                <p>
+                                                    <span class="quantity">@item.quantity</span>x
+                                                    @item.name
+                                                    <span class="label green pull-right" data-price="@item.price">$@item.price x @item.quantity</span>
+                                                </p>
+                                            </div>
+                                        </li>
+                                       }
+
+                                        <li class="collection-item">
+                                            <h5>Total<span class="label blue total pull-right m-total">$3000.00</span></h5>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </form>
+                            <!--/.Form-->
+                            </div>
+                    </div>
+
+                    <!--/.Product Panel-->
+
+                </div>
+            
+
+
+            </div>
+
+
+
+        </section>
+        <!--/.Section: Basic Product Listing-->
+    </div>
+</main>
+
+@Scripts.Render("~/bundles/jquery")
+<!-- SCRIPTS-->
+<script>
+        $(document).ready(function () {
+
+            changeTotal();
+            function changeTotal() {
+                var total = 0;
+                $('.m-item').each(function () {
+                    var quan = $(this).find('.quantity').text();
+                    var price = $(this).find('.green').attr('data-price');
+                    total += parseInt(quan) * parseFloat(price);
+                });
+                $('.m-in-total').val(total);
+                $('.m-total').text('$' + total);
+            };
+           
+        });
+</script>

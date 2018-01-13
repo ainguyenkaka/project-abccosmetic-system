@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Orders";
+    ViewBag.navbarColor = "blue";
+}
+<main>
+    <!--Main Container-->
+    <div class="container">
+        <!--Section: Basic Product Listing-->
+        <section id="products">
+            <div class="divider-new"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <!--Product Panel-->
+
+                    <div class="card-panel product-panel hoverable m-card-panel">
+                        <div class="row">
+
+                            <div class="col-xs-12 col-sm-6 col-lg-5">
+                                <!--Form-->
+                                <form class="form-validate" action="/Staff/SearchOrders" method="POST">
+                                    <h3 class="card-title">Orders</h3>
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">search</i>
+                                        <input type="text" id="f-title" class="form-control validate" name="name" required>
+                                        <label for="f-title" data-error="wrong" data-success="right">Order Name</label>
+                                    </div>
+                                    <br />
+                                    <div class="pull-right">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-ptc waves-effect waves-light">Search</button>
+                                    </div>
+
+                                </form>
+                                <!--/.Form-->
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-lg-1">
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-lg-6">
+                                <ul class="list-group">
+                                    @foreach (var item in Model)
+                                    {
+                                        <li class="list-group-item">
+                                            @item.date | @item.name | $@item.total 
+                                            @if (item.StatusID != 3)
+                                            {
+                                            <a class="pull-right user-item" data-id="@item.id" data-name="@item.name"><span class="label red">Payment</span></a>
+                                            }
+                                            else
+                                            {
+                                            <span class="label green pull-right">Paied</span>
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--/.Product Panel-->
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </section>
+        <!--/.Section: Basic Product Listing-->
+    </div>
+</main>
+
+@Scripts.Render("~/bundles/jquery")
+<!-- SCRIPTS-->
+<script>
+    $(document).ready(function () {
+
+        $('.user-item').click(function () {
+            var iId = $(this).attr("data-id");
+            var name = $(this).attr("data-name");
+            $.redirectPost('/Staff/Payment', { oId: iId, oName : name});
+        });
+
+
+        // jquery extend function
+        $.extend(
+        {
+            redirectPost: function (location, args) {
+                var form = '';
+                $.each(args, function (key, value) {
+                    form += '<input type="hidden" name="' + key + '" value="' + value + '">';
+                });
+                $('<form action="' + location + '" method="POST">' + form + '</form>').appendTo('body').submit();
+            }
+        });
+
+
+    });
+</script>

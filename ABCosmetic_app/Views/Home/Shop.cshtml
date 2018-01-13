@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "Shop";
+    ViewBag.navbarColor = "blue";
+}
+
+<main>
+    <!--Main Container-->
+    <div class="container">
+        <!--Section: Basic Product Listing-->
+        <section id="products">
+            <div class="divider-new"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    @foreach (var item in Model)
+                    {
+                        var image = item.image + ".jpg";
+                        <div class="col-md-3">
+
+                            <!--Card-->
+                            <div class="card card-product hoverable m-product">
+
+                                <!--Image-->
+                                <div class="card-image waves-effect waves-block waves-light view overlay hm-white-slight">
+                                    <img class="m-product-img" src="~/Content/Images/@image" />
+                                </div>
+                                <!--/.Image-->
+                                <!--Card content: Name and price-->
+                                <div class="card-content text-center">
+                                    <div class="row">
+                                        <a class="product-item" data-id="@item.id"><h5 class="product-title">@item.name</h5></a>
+                                    </div>
+                                    <div>
+                                        <p class="card-text">@item.description.Substring(0, 20) ...</p>
+                                    </div>
+                                    <div class="price">
+                                        <p class="green-text medium-500 m-product-price">@item.price<span class="discount light-300 black-text">$900</span></p>
+                                    </div>
+                                </div>
+                                <!--/.Card content: Name and price-->
+                               
+
+                            </div>
+                            <!--/.Card-->
+
+                        </div>
+
+                    }
+
+                   
+                </div>
+            </div>
+            <div>
+                <div class="col-md-12">
+                    <div align="center">
+                        <div class="card">
+                            <ul class="pagination pag-circle">
+                                <li><a href="#"><i class="material-icons">chevron_left</i></a></li>
+                                @for (var index = 1; index < ViewBag.Pages; index++)
+                                {
+                                    if (ViewBag.PageIndex == index )
+                                    {
+                                    <li class="active"><a href="/shop/@index">@index</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="/shop/@index">@index</a></li>
+                                    }
+                                }
+
+                                <li><a href="#"><i class="material-icons">chevron_right</i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+        <!--/.Section: Basic Product Listing-->
+    </div>
+</main>
+
+@Scripts.Render("~/bundles/jquery")
+<!-- SCRIPTS-->
+<script>
+        $(document).ready(function () {
+
+            $('.product-item').click(function () {
+                var iId = $(this).attr("data-id");
+                $.redirectPost('/detail', { id: iId });
+            });
+
+          
+            // jquery extend function
+            $.extend(
+            {
+                redirectPost: function (location, args) {
+                    var form = '';
+                    $.each(args, function (key, value) {
+                        form += '<input type="hidden" name="' + key + '" value="' + value + '">';
+                    });
+                    $('<form action="' + location + '" method="POST">' + form + '</form>').appendTo('body').submit();
+                }
+            });
+        });
+</script>

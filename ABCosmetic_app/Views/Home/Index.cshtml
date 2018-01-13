@@ -1,0 +1,274 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    ViewBag.navbarColor = "";
+}
+
+
+
+<!--Section: Main Carousel-->
+<section id="intro">
+
+    <!-- Carousel -->
+    <div id="carousel1" class="carousel slide carousel-fade wow fadeIn">
+
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel1" data-slide-to="0" class="active">
+            </li>
+            <li data-target="#carousel1" data-slide-to="1"></li>
+            <li data-target="#carousel1" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner z-depth-1" role="listbox">
+
+            <!-- First slide -->
+            <div class="item active">
+                <div class="view overlay hm-blue-slight">
+                    <a>
+                        <img src="~/Content/Images/bg1.jpg" class="img-responsive m-bg" alt="slide1">
+                        <div class="mask waves-effect waves-light"></div>
+                    </a>
+                    <div class="carousel-caption hidden-xs">
+                        <div class="animated fadeInDown">
+                            <h5>ABCosmetic Products</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.item -->
+            <!-- Second slide -->
+            <div class="item">
+                <div class="view overlay hm-blue-slight">
+                    <a>
+                        <img src="~/Content/Images/bg2.jpg" class="img-responsive m-bg" alt="slide2">
+                        <div class="mask waves-effect waves-light"></div>
+                    </a>
+                    <div class="carousel-caption hidden-xs">
+                        <div class="animated fadeInDown">
+                            <h5>ABCosmetic Products</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.item -->
+            <!-- Third slide -->
+            <div class="item">
+                <div class="view overlay hm-blue-slight">
+                    <a>
+                        <img src="~/Content/Images/bg3.jpg" class="img-responsive m-bg" alt="slide3">
+                        <div class="mask waves-effect waves-light"></div>
+                    </a>
+                    <div class="carousel-caption hidden-xs">
+                        <div class="animated fadeInDown">
+                            <h5>ABCosmetic Products</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.item -->
+
+        </div>
+        <!-- /.carousel-inner -->
+        <!-- Controls -->
+        <a class="left carousel-control new-control" href="#carousel1" role="button" data-slide="prev">
+            <span class="fa fa fa-angle-left waves-effect waves-light"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control new-control" href="#carousel1" role="button" data-slide="next">
+            <span class="fa fa fa-angle-right waves-effect waves-light"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+
+    </div>
+    <!-- /.carousel -->
+
+</section>
+<!--/.Section: Main Carousel-->
+
+<main>
+    <!--Main Container-->
+    <div class="container">
+
+        <!--Section: Basic Product Listing-->
+        <section id="products">
+            <div class="divider-new">Best Products</div>
+            <div class="row">
+                @foreach (var item in Model.products.GetRange(0,4))
+                {
+
+                    var image  = item.image + ".jpg";
+
+
+                    <div class="col-md-3">
+
+                        <!--Card-->
+                        <div class="card card-product hoverable m-product">
+
+                            <!--Image-->
+                            <div class="card-image waves-effect waves-block waves-light view overlay hm-white-slight">
+                                <img src="~/Content/Images/@image" />
+                            </div>
+                            <!--/.Image-->
+                            <!--Card content: Name and price-->
+                            <div class="card-content text-center">
+                                <div class="row">
+                                    <a class="product-item" data-id="@item.id">
+                                        <h5 class="product-title">@item.name</h5>
+                                    </a>
+                                </div>
+                                <div>
+                                    <p class="card-text">@item.description.Substring(0, 20) ...</p>
+                                </div>
+                                <div class="price">
+                                    <p class="green-text medium-500">@item.price <span class="discount light-300 black-text">$700</span></p>
+                                </div>
+                              
+                            </div>
+                            <!--/.Card content: Name and price-->
+                            <!--Buttons-->
+                           
+                            <!--/.Buttons-->
+
+                        </div>
+                        <!--/.Card-->
+
+                    </div>
+
+                }
+
+            </div>
+
+        </section>
+        <!--/.Section: Basic Product Listing-->
+        <!--Section: Categories/Collections-->
+        <section id="brands">
+            <div class="divider-new">Top Brands</div>
+
+            <!--Cards row-->
+            <div class="row">
+                @foreach (var item in Model.brands.GetRange(0,4))
+                {
+                    var image = item.image + ".jpg";
+
+                    <div class="col-md-3">
+                        <!--Card-->
+                        <div class="collection-card hoverable waves-effect hm-zoom z-depth-1 text-center m-category">
+                            <!--Card image-->
+                            <a href="Shop">
+                                <img src="~/Content/Images/@image" class="img-responsive">
+                            </a>
+                            <!--Card footer-->
+                            <div class="card-footer">
+                                <!-- Title -->
+                                <h5>@item.name</h5>
+
+                                <!--Card details-->
+                            </div>
+                        </div>
+                        <!--/.Card-->
+                    </div>
+
+                }
+            </div>
+            <!--/.Cards row-->
+
+        </section>
+        <!--/.Section: Categories/Collections-->
+        <!--Section: Contact-->
+        <section id="contact">
+            <div class="divider-new">Contact me</div>
+
+            <div class="row">
+
+                <!--Google Map-->
+                <div class="col-md-8">
+                    <div id="map-container" class="card-panel hoverable wow fadeInRight" style="height: 300px"></div>
+                </div>
+
+                <!-- Contact details -->
+                <div class="col-md-4 text-center">
+
+                    <ul class="contact-data">
+
+                        <li>
+                            <a class="btn-floating btn-small waves-effect waves-light blue-grey wow fadeInRight" data-wow-delay="0.2s"><i class="material-icons">pin_drop</i></a>
+                            <p>Hanoi, Vietnam</p>
+                        </li>
+
+                        <li>
+                            <a class="btn-floating btn-small waves-effect waves-light blue-grey wow fadeInRight" data-wow-delay="0.4s"><i class="material-icons">phone</i></a>
+                            <p>+ 01 234 567 89</p>
+                        </li>
+
+                        <li>
+                            <a class="btn-floating btn-small waves-effect waves-light blue-grey wow fadeInRight" data-wow-delay="0.6s"><i class="material-icons">email</i></a>
+                            <p>mws@gmail.com</p>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </section>
+        <!--/.Section: Contact-->
+
+    </div>
+    <!--/.Main Container-->
+</main>
+
+
+@Scripts.Render("~/bundles/jquery")
+<!-- SCRIPTS-->
+<script>
+        $(document).ready(function () {
+
+            $('.carousel').carousel();
+
+
+
+            $('.product-item').click(function () {
+                var iId = $(this).attr("data-id");
+                $.redirectPost('/detail', { id: iId });
+            });
+
+
+            // jquery extend function
+            $.extend(
+            {
+                redirectPost: function (location, args) {
+                    var form = '';
+                    $.each(args, function (key, value) {
+                        form += '<input type="hidden" name="' + key + '" value="' + value + '">';
+                    });
+                    $('<form action="' + location + '" method="POST">' + form + '</form>').appendTo('body').submit();
+                }
+            });
+
+        });
+
+        function init_map() {
+            var var_location = new google.maps.LatLng(21.032691, 105.838687);
+
+            var var_mapoptions = {
+                center: var_location,
+                zoom: 14
+            };
+
+            var var_marker = new google.maps.Marker({
+                position: var_location,
+                map: var_map,
+                title: "Ha Noi"
+            });
+
+            var var_map = new google.maps.Map(document.getElementById("map-container"),
+                var_mapoptions);
+
+            var_marker.setMap(var_map);
+
+        }
+
+        google.maps.event.addDomListener(window, 'load', init_map);
+</script>

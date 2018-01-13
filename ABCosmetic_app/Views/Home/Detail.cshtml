@@ -1,0 +1,241 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    ViewBag.navbarColor = "blue";
+    var item = ViewBag.item;
+    item.image += ".jpg";
+}
+
+<main>
+    <!--Main Container-->
+    <div class="container">
+        <!--Section: Basic Product Listing-->
+        <section id="products">
+            <div class="divider-new"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <!--Product Panel-->
+
+                    <div class="card-panel product-panel hoverable m-card-panel">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-lg-5">
+                                <!--Card-->
+                                <div class="collection-card hoverable waves-effect hm-zoom z-depth-1 text-center">
+                                    <!--Card image-->
+                                    <img src="~/Content/Images/@item.image" class="img-responsive">
+
+                                </div>
+                                <!--/.Card-->
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-lg-3">
+                                <!--Title-->
+                                <h4 class="m-title">@item.name</h4>
+                                <hr>
+                                <h4> <span class="label rgba-red-strong">-20%</span></h4>
+                                <!--Price-->
+                                <div class="price">
+                                    <p class="green-text medium-500"><span class="m-price">@item.price</span> <span class="discount light-300 black-text">$700</span></p>
+                                </div>
+                                Quantity: <b>@item.quantity</b>
+
+                            </div>
+                            <!--Second column: product details-->
+                            <!--Third column: product description-->
+                            <div class="col-xs-12 col-sm-12 col-lg-4">
+                                <p class="m-des">
+                                    @item.description
+                                </p>
+                                <!--Buttons-->
+                                <div class="card-btn text-center">
+                                    <a href="/shop" class="btn btn-default waves-effect waves-light">Shop now</a>
+                                    <a href="/account" class="btn-floating btn-small waves-effect waves-light blue darken-4 top-btn"><i class="material-icons">account_box</i></a>
+                                </div>
+                                <!--/.Buttons-->
+                            </div>
+                            <!--/.Third column: product description-->
+                        </div>
+                    </div>
+
+                    <!--/.Product Panel-->
+
+                </div>
+                <div class="col-md-12">
+
+                    <!-- Carousel -->
+                    <div id="carousel-multi-item" class="carousel slide multiitem-car">
+
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators" style="top:0px; height:30px;">
+                            <li data-target="#carousel-multi-item" data-slide-to="0" class="active">
+                            </li>
+                            <li data-target="#carousel-multi-item" data-slide-to="1"></li>
+                            <li data-target="#carousel-multi-item" data-slide-to="2"></li>
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+
+
+                            <!-- First slide -->
+                            <div class="item active">
+
+                                <!-- Row -->
+                                <div class="row">
+                                    @foreach (var pro in Model.GetRange(0, 4))
+                                    {
+                                        pro.image += ".jpg";
+                                    <!-- Multi-item column -->
+                                        <div class="col-sm-3 item-card">
+                                            <!--Card-->
+                                            <div class="card card-product waves-effect waves-block m-card waves-effect waves-block hoverable m-product" data-des="@pro.description">
+
+                                                <!--Image-->
+                                                <div class="card-image view overlay hm-white-slight">
+                                                    <a href="#"><img src="~/Content/Images/@pro.image"></a>
+                                                </div>
+                                                <!--/.Image-->
+                                                <!--Card content: Name and price-->
+                                                <div class="card-content text-center">
+                                                    <div class="row">
+                                                        <h5 class="product-title">@pro.name</h5>
+                                                    </div>
+                                                    <div class="price">
+                                                        <p class="green-text medium-500">@pro.price <span class="discount light-300 black-text">$700</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/.Card-->
+                                        </div>
+                                    <!-- /.Multi-item column -->
+
+                                    }
+                                </div>
+                                <!-- /.row -->
+                            </div>
+                            <!-- /.item -->
+                            <!-- Second slide -->
+                            <div class="item">
+
+                                <!-- Row -->
+                                <div class="row">
+                                    @foreach (var pro in Model.GetRange(4, 4))
+                                    {
+                                        pro.image += ".jpg";
+                                    <!-- Multi-item column -->
+                                    <div class="col-sm-3 item-card">
+                                        <!--Card-->
+                                        <div class="card card-product waves-effect waves-block m-card waves-effect waves-block hoverable m-product"  data-des="@pro.description">
+
+                                            <!--Image-->
+                                            <div class="card-image view overlay hm-white-slight">
+                                                <a href="#"><img src="~/Content/Images/@pro.image"></a>
+                                            </div>
+                                            <!--/.Image-->
+                                            <!--Card content: Name and price-->
+                                            <div class="card-content text-center">
+                                                <div class="row">
+                                                    <h5 class="product-title">@pro.name</h5>
+                                                </div>
+                                                <div class="price">
+                                                    <p class="green-text medium-500">@pro.price <span class="discount light-300 black-text">$700</span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--/.Card-->
+                                    </div>
+                                    <!-- /.Multi-item column -->
+
+                                    }
+                                </div>
+                                <!-- /.row -->
+                            </div>
+                            <!-- /.item -->
+                            <!-- Third slide -->
+                            <div class="item">
+
+                                <!-- Row -->
+                                <div class="row">
+                                    @foreach (var pro in Model.GetRange(2, 4))
+                                    {
+
+                                    <!-- Multi-item column -->
+                                        <div class="col-sm-3 item-card">
+                                            <!--Card-->
+                                            <div class="card card-product waves-effect waves-block m-card waves-effect waves-block hoverable m-product"  data-des="@pro.description">
+
+                                                <!--Image-->
+                                                <div class="card-image view overlay hm-white-slight">
+                                                    <a href="#"><img src="~/Content/Images/@pro.image"></a>
+                                                </div>
+                                                <!--/.Image-->
+                                                <!--Card content: Name and price-->
+                                                <div class="card-content text-center">
+                                                    <div class="row">
+                                                        <h5 class="product-title">@pro.name</h5>
+                                                    </div>
+                                                    <div class="price">
+                                                        <p class="green-text medium-500">@pro.price <span class="discount light-300 black-text">$700</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/.Card-->
+                                        </div>
+                                    <!-- /.Multi-item column -->
+
+                                    }
+                                </div>
+                                <!-- /.row -->
+                            </div>
+                            <!-- /.item -->
+
+                        </div>
+                        <!-- /.carousel-inner -->
+
+                        <div class="text-center">
+                            <a class="btn-floating  blue darken-4 btn-small waves-effect waves-light" href="#carousel-multi-item" role="button" data-slide="prev"><i class="material-icons">keyboard_arrow_left</i></a>
+                            <a class="btn-floating  blue darken-4 btn-small waves-effect waves-light" href="#carousel-multi-item" role="button" data-slide="next"><i class="material-icons">keyboard_arrow_right</i></a>
+                        </div>
+                    </div>
+                    <!-- /.carousel -->
+
+
+                </div>
+
+
+            </div>
+
+
+
+        </section>
+        <!--/.Section: Basic Product Listing-->
+    </div>
+</main>
+
+@Scripts.Render("~/bundles/jquery")
+<!-- SCRIPTS-->
+<script>
+        $(document).ready(function () {
+
+            $('.carousel').carousel();
+
+            $('.m-card').click(function () {
+                var img = $(this).find('img').attr('src');
+                var name = $(this).find('.product-title').text();
+                var price = $(this).find('.green-text').clone().children().remove().end().text();
+                var discount = $(this).find('.discount').text();
+                var des = $(this).attr("data-des");
+
+                changeProduct(img, name, price, discount, des);
+            });
+
+            function changeProduct(img, name, price, discount, des) {
+                $('.m-card-panel').find('img').attr('src', img);
+                $('.m-card-panel').find('.m-title').text(name);
+                $('.m-card-panel').find('.m-price').text(price);
+                $('.m-card-panel').find('.discount').text(discount);
+                $('.m-card-panel').find('.m-des').text(des);
+            }
+        });
+
+</script>

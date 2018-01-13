@@ -1,0 +1,205 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+
+}
+
+<!-- Intro image -->
+<section class="full-bg-img" id="sec-home">
+    <!--Mask-->
+    <div class="view">
+
+        <!--Alignment-->
+        <div class="verticalcenter">
+            <div class="container">
+                <div class="row">
+
+                    <!--Content-->
+                    <div class="col-md-6 white-text wow fadeInLeft">
+                        <br>
+                        <h2>ABCosmetic Products</h2>
+
+                        <p>We focus on proving the best products for our customers</p>
+                        <p>We focus on helping our customers share their products</p>
+                        <a href="/shop" class="btn btn-primary btn-ptc btn-lg waves-effect waves-light">View Now<i class="material-icons right">shopping_cart</i></a>
+
+                    </div>
+                    <!--/.Content-->
+                    <!--Form-->
+                    <div class="col-md-6 wow fadeInRight">
+                        @{
+                            var user = (ABCosmetic_app.UserService.User)Session["user"];
+                        }
+                        @if (user == null)
+                        {
+                            <div class="card-panel">
+
+                                <!--Header-->
+                                <div class="text-center">
+                                    <h4><i class="fa fa-user"></i> Social Login (upcoming)</h4>
+                                    <a class="btn-floating btn-large waves-effect waves-light m-fb"><i class="fa fa-facebook"> </i></a>
+                                    <a class="btn-floating btn-large waves-effect waves-light m-tw"><i class="fa fa-twitter"> </i></a>
+                                    <a class="btn-floating btn-large waves-effect waves-light m-gplus"><i class="fa fa-google-plus"> </i></a>
+                                    <a class="btn-floating btn-large waves-effect waves-light m-link"><i class="fa fa-linkedin"> </i></a>
+                                    <a class="btn-floating btn-large waves-effect waves-light m-git"><i class="fa fa-github"> </i></a>
+                                </div>
+                                <!--/.Header-->
+                                <!--Form-->
+                                <form class="form-validate" action="/account/Login" method="POST">
+                                    <b style="color:red;">@ViewBag.ErrorMessage</b>
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">email</i>
+                                        <input type="email" id="f-email" class="form-control validate" name="email" required value="@ViewBag.Email">
+                                        <label for="f-email" data-error="wrong" data-success="right">Your email</label>
+                                    </div>
+                                    <br />
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">lock</i>
+                                        <input type="password" id="f-password" class="form-control validate" name="password" required>
+                                        <label for="f-password" data-error="wrong" data-success="right">Your password</label>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-ptc waves-effect waves-light">Login Or Sign up</button>
+
+                                    </div>
+
+                                </form>
+                                <!--/.Form-->
+                            </div>
+                        }
+                        else
+                        {
+
+                            <div class="card-panel">
+
+                                <!--Header-->
+                                <!--Header-->
+                                <div class="text-center">
+                                    <h4><i class="fa fa-user"></i> Follow us on:</h4>
+                                    <a class="btn-floating btn-large waves-effect waves-light m-fb"><i class="fa fa-facebook"> </i></a>
+                                    <a class="btn-floating btn-large waves-effect waves-light m-tw"><i class="fa fa-twitter"> </i></a>
+                                    <a class="btn-floating btn-large waves-effect waves-light m-gplus"><i class="fa fa-google-plus"> </i></a>
+                                    <a class="btn-floating btn-large waves-effect waves-light m-link"><i class="fa fa-linkedin"> </i></a>
+                                    <a class="btn-floating btn-large waves-effect waves-light m-git"><i class="fa fa-github"> </i></a>
+                                </div>
+                                <!--/.Header-->
+                                <!--/.Header-->
+                                <!--Form-->
+                                
+                                @*<form class="form-validate" action="/account/SendFeeback" method="POST">
+                                    <b style="color:red;">@ViewBag.ErrorMessage</b>
+                                    <b style="color:lawngreen;">@ViewBag.SuccessMessage</b>
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">title</i>
+                                        <input type="text" id="f-title" class="form-control validate" name="title" required>
+                                        <label for="f-title" data-error="wrong" data-success="right">Your Title</label>
+                                    </div>
+                                    <br />
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">textsms</i>
+                                        <textarea type="text" id="f-content" class="md-textarea form-control validate" name="content" style="height:150px;" required></textarea>
+                                        <label for="f-content" data-error="wrong" data-success="right">Icon Prefix</label>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-ptc waves-effect waves-light">Send Now</button>
+                                        <a href="/account/Logout" class="btn btn-warning btn-lg btn-ptc waves-effect waves-light">Logout</a>
+                                    </div>
+
+                                </form>*@
+                                <!--/.Form-->
+
+                                <div class="text-center">
+                                    <a href="/account/Logout" class="btn btn-warning btn-lg btn-ptc waves-effect waves-light">Logout</a>
+                                </div>
+                            </div>
+                    <!--/.Form-->
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.Alignment-->
+
+    </div>
+    <!--/.Mask-->
+</section>
+<!--/. Intro image -->
+<main>
+    <!--Main Container-->
+    <div class="container">
+        <!--Section: Basic Product Listing-->
+        <section id="products">
+            <div class="divider-new">Best Products</div>
+            <div class="row">
+
+                @foreach (var item in Model.GetRange(0, 4))
+                {
+                    var image = item.image + ".jpg";
+                    <div class="col-md-3">
+
+                        <!--Card-->
+                        <div class="card card-product hoverable m-product">
+
+                            <!--Image-->
+                            <div class="card-image waves-effect waves-block waves-light view overlay hm-white-slight">
+                                <img src="~/Content/Images/@image" />
+                            </div>
+                            <!--/.Image-->
+                            <!--Card content: Name and price-->
+                            <div class="card-content text-center">
+                                <div class="row">
+                                    <a class="product-item" data-id="@item.id"><h5 class="product-title">@item.name</h5></a>
+                                </div>
+                                <div>
+                                    <p class="card-text">@item.description.Substring(0, 20) ...</p>
+                                </div>
+                                <div class="price">
+                                    <p class="green-text medium-500">@item.price<span class="discount light-300 black-text">$1000</span></p>
+                                </div>
+                            </div>
+                            <!--/.Card content: Name and price-->
+                           
+
+                        </div>
+                        <!--/.Card-->
+
+                    </div>
+                }
+            </div>
+        </section>
+        <!--/.Section: Basic Product Listing-->
+    </div>
+</main>
+
+
+@Scripts.Render("~/bundles/jquery")
+<!-- SCRIPTS-->
+<script>
+        $(document).ready(function () {
+
+            $('.carousel').carousel();
+
+
+            $('.product-item').click(function () {
+                var iId = $(this).attr("data-id");
+                $.redirectPost('/detail', { id: iId });
+            });
+
+           
+
+            // jquery extend function
+            $.extend(
+            {
+                redirectPost: function (location, args) {
+                    var form = '';
+                    $.each(args, function (key, value) {
+                        form += '<input type="hidden" name="' + key + '" value="' + value + '">';
+                    });
+                    $('<form action="' + location + '" method="POST">' + form + '</form>').appendTo('body').submit();
+                }
+            });
+
+        });
+</script>

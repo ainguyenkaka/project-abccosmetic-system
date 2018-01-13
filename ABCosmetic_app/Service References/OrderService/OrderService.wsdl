@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="AddNew">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="content" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="staffID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="total" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddNewResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddNewResult" type="tns:Order" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Order">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:AbstractEntity">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="date" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="total" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="description" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="StatusID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="CustomerID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="StaffID" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="AbstractEntity">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetOrdersByCustomerID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrdersByCustomerIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrdersByCustomerIDResult" type="tns:ArrayOfOrder" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfOrder">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Order" nillable="true" type="tns:Order" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ChangeOrderToPaied">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeOrderToPaiedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ChangeOrderToPaiedResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDailyOrders">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetDailyOrdersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDailyOrdersResult" type="tns:ArrayOfOrder" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWeeklyOrders">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetWeeklyOrdersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWeeklyOrdersResult" type="tns:ArrayOfOrder" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDailyOrdersForAStaff">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="staffID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDailyOrdersForAStaffResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDailyOrdersForAStaffResult" type="tns:ArrayOfOrder" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWeeklyOrdersForAStaff">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="staffID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWeeklyOrdersForAStaffResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWeeklyOrdersForAStaffResult" type="tns:ArrayOfOrder" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDailyOrdersForAStore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="storeID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDailyOrdersForAStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDailyOrdersForAStoreResult" type="tns:ArrayOfOrder" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWeeklyOrdersForAStore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="storeID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWeeklyOrdersForAStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWeeklyOrdersForAStoreResult" type="tns:ArrayOfOrder" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="All">
+        <s:complexType />
+      </s:element>
+      <s:element name="AllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AllResult" type="tns:ArrayOfOrder" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetByID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetByIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetByIDResult" type="tns:Order" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchByName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="text" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchByNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchByNameResult" type="tns:ArrayOfOrder" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Delete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DeleteResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AddNewSoapIn">
+    <wsdl:part name="parameters" element="tns:AddNew" />
+  </wsdl:message>
+  <wsdl:message name="AddNewSoapOut">
+    <wsdl:part name="parameters" element="tns:AddNewResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrdersByCustomerIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrdersByCustomerID" />
+  </wsdl:message>
+  <wsdl:message name="GetOrdersByCustomerIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrdersByCustomerIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeOrderToPaiedSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeOrderToPaied" />
+  </wsdl:message>
+  <wsdl:message name="ChangeOrderToPaiedSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeOrderToPaiedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDailyOrdersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDailyOrders" />
+  </wsdl:message>
+  <wsdl:message name="GetDailyOrdersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDailyOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetWeeklyOrdersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWeeklyOrders" />
+  </wsdl:message>
+  <wsdl:message name="GetWeeklyOrdersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWeeklyOrdersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDailyOrdersForAStaffSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDailyOrdersForAStaff" />
+  </wsdl:message>
+  <wsdl:message name="GetDailyOrdersForAStaffSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDailyOrdersForAStaffResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetWeeklyOrdersForAStaffSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWeeklyOrdersForAStaff" />
+  </wsdl:message>
+  <wsdl:message name="GetWeeklyOrdersForAStaffSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWeeklyOrdersForAStaffResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDailyOrdersForAStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDailyOrdersForAStore" />
+  </wsdl:message>
+  <wsdl:message name="GetDailyOrdersForAStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDailyOrdersForAStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetWeeklyOrdersForAStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWeeklyOrdersForAStore" />
+  </wsdl:message>
+  <wsdl:message name="GetWeeklyOrdersForAStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWeeklyOrdersForAStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="AllSoapIn">
+    <wsdl:part name="parameters" element="tns:All" />
+  </wsdl:message>
+  <wsdl:message name="AllSoapOut">
+    <wsdl:part name="parameters" element="tns:AllResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetByIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetByID" />
+  </wsdl:message>
+  <wsdl:message name="GetByIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchByNameSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchByName" />
+  </wsdl:message>
+  <wsdl:message name="SearchByNameSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="DeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:portType name="OrderServiceSoap">
+    <wsdl:operation name="AddNew">
+      <wsdl:input message="tns:AddNewSoapIn" />
+      <wsdl:output message="tns:AddNewSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrdersByCustomerID">
+      <wsdl:input message="tns:GetOrdersByCustomerIDSoapIn" />
+      <wsdl:output message="tns:GetOrdersByCustomerIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeOrderToPaied">
+      <wsdl:input message="tns:ChangeOrderToPaiedSoapIn" />
+      <wsdl:output message="tns:ChangeOrderToPaiedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOrders">
+      <wsdl:input message="tns:GetDailyOrdersSoapIn" />
+      <wsdl:output message="tns:GetDailyOrdersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWeeklyOrders">
+      <wsdl:input message="tns:GetWeeklyOrdersSoapIn" />
+      <wsdl:output message="tns:GetWeeklyOrdersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOrdersForAStaff">
+      <wsdl:input message="tns:GetDailyOrdersForAStaffSoapIn" />
+      <wsdl:output message="tns:GetDailyOrdersForAStaffSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWeeklyOrdersForAStaff">
+      <wsdl:input message="tns:GetWeeklyOrdersForAStaffSoapIn" />
+      <wsdl:output message="tns:GetWeeklyOrdersForAStaffSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOrdersForAStore">
+      <wsdl:input message="tns:GetDailyOrdersForAStoreSoapIn" />
+      <wsdl:output message="tns:GetDailyOrdersForAStoreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWeeklyOrdersForAStore">
+      <wsdl:input message="tns:GetWeeklyOrdersForAStoreSoapIn" />
+      <wsdl:output message="tns:GetWeeklyOrdersForAStoreSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="All">
+      <wsdl:input message="tns:AllSoapIn" />
+      <wsdl:output message="tns:AllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetByID">
+      <wsdl:input message="tns:GetByIDSoapIn" />
+      <wsdl:output message="tns:GetByIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchByName">
+      <wsdl:input message="tns:SearchByNameSoapIn" />
+      <wsdl:output message="tns:SearchByNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:DeleteSoapIn" />
+      <wsdl:output message="tns:DeleteSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OrderServiceSoap" type="tns:OrderServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddNew">
+      <soap:operation soapAction="http://tempuri.org/AddNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrdersByCustomerID">
+      <soap:operation soapAction="http://tempuri.org/GetOrdersByCustomerID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeOrderToPaied">
+      <soap:operation soapAction="http://tempuri.org/ChangeOrderToPaied" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOrders">
+      <soap:operation soapAction="http://tempuri.org/GetDailyOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWeeklyOrders">
+      <soap:operation soapAction="http://tempuri.org/GetWeeklyOrders" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOrdersForAStaff">
+      <soap:operation soapAction="http://tempuri.org/GetDailyOrdersForAStaff" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWeeklyOrdersForAStaff">
+      <soap:operation soapAction="http://tempuri.org/GetWeeklyOrdersForAStaff" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOrdersForAStore">
+      <soap:operation soapAction="http://tempuri.org/GetDailyOrdersForAStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWeeklyOrdersForAStore">
+      <soap:operation soapAction="http://tempuri.org/GetWeeklyOrdersForAStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="All">
+      <soap:operation soapAction="http://tempuri.org/All" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByID">
+      <soap:operation soapAction="http://tempuri.org/GetByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchByName">
+      <soap:operation soapAction="http://tempuri.org/SearchByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="OrderServiceSoap12" type="tns:OrderServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddNew">
+      <soap12:operation soapAction="http://tempuri.org/AddNew" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrdersByCustomerID">
+      <soap12:operation soapAction="http://tempuri.org/GetOrdersByCustomerID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeOrderToPaied">
+      <soap12:operation soapAction="http://tempuri.org/ChangeOrderToPaied" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOrders">
+      <soap12:operation soapAction="http://tempuri.org/GetDailyOrders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWeeklyOrders">
+      <soap12:operation soapAction="http://tempuri.org/GetWeeklyOrders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOrdersForAStaff">
+      <soap12:operation soapAction="http://tempuri.org/GetDailyOrdersForAStaff" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWeeklyOrdersForAStaff">
+      <soap12:operation soapAction="http://tempuri.org/GetWeeklyOrdersForAStaff" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDailyOrdersForAStore">
+      <soap12:operation soapAction="http://tempuri.org/GetDailyOrdersForAStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWeeklyOrdersForAStore">
+      <soap12:operation soapAction="http://tempuri.org/GetWeeklyOrdersForAStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="All">
+      <soap12:operation soapAction="http://tempuri.org/All" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByID">
+      <soap12:operation soapAction="http://tempuri.org/GetByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchByName">
+      <soap12:operation soapAction="http://tempuri.org/SearchByName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction="http://tempuri.org/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OrderService">
+    <wsdl:port name="OrderServiceSoap" binding="tns:OrderServiceSoap">
+      <soap:address location="http://localhost:50962/Services/OrderService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="OrderServiceSoap12" binding="tns:OrderServiceSoap12">
+      <soap12:address location="http://localhost:50962/Services/OrderService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
